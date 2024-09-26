@@ -24,6 +24,7 @@ from . import views  # Ensure this imports the views from the correct file
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('articles.urls')),  # Include articles app URLs
+    path('accounts/', include('accounts.urls')),
     path('about/', views.about, name='about'),  # Your 'about' view
     path('', views.homepage, name='homepage'),  # Your homepage view
 ]
