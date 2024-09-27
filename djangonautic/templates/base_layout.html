@@ -11,8 +11,13 @@
   </head>
   <body>
     <header class="wrapper">
+      <!-- <h1>
+          <a href="{% url 'articles:list' %}"
+            ><img src="{% static 'logo.png' %}" alt="djangonautic"
+          /></a>
+        </h1> -->
       <h1>
-        <a href="{% url 'articles:list' %}"
+        <a href="{% url 'home' %}"
           ><img src="{% static 'logo.png' %}" alt="djangonautic"
         /></a>
       </h1>
@@ -30,7 +35,9 @@
               <button type="submit">Logout</button>
             </form>
           </li>
-          <li><a href="{% url 'articles:create' %}" class="">New Article</a></li>
+          <li>
+            <a href="{% url 'articles:create' %}" class="">New Article</a>
+          </li>
           {% else %}
           <li><a href="{% url 'accounts:login' %}">Login</a></li>
           <li><a href="{% url 'accounts:signup' %}">Signup</a></li>

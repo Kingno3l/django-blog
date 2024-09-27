@@ -20,13 +20,15 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from . import views  # Ensure this imports the views from the correct file
+from articles import views as article_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('articles/', include('articles.urls')),  # Include articles app URLs
     path('accounts/', include('accounts.urls')),
     path('about/', views.about, name='about'),  # Your 'about' view
-    path('', views.homepage, name='homepage'),  # Your homepage view
+    path('', article_views.article_list, name='home'),  # Your homepage view
+    # path('', views.homepage, name='homepage'),  # Your homepage view
 ]
 
 # Serving static files during development
