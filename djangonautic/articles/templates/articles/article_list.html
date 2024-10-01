@@ -1,20 +1,146 @@
-{% extends 'base_layout.html' %} {% block content %}
+{% extends 'base_layout.html' %} {% block content %} {% load static %}
 
-<h1>Article lists</h1>
+<div class="container">
+  <div class="row justify-content-center">
+   <div class="col-lg-8 mb-5 mb-lg-0">
+    <h2 class="h5 section-title">Recent Post</h2>
+    {% for article in articles %}
+        <article class="card mb-4">
+            <div class="post-slider">
+                <img src="{% static 'images/post/post-7.jpg' %}" class="card-img-top" alt="post-thumb" />
+            </div>
 
-<div class="articles">
-  {% for article in articles %}
-  <div class="article">
-    <h2>
-      <a href="{% url 'articles:detail' slug=article.slug %}"
-        >{{ article.title }}</a
-      >
-    </h2>
-    <!-- <h2><a href="#">{{article.title}}</a></h2> -->
-    <p>{{article.snippet}}</p>
-    <p>{{article.date}}</p>
+            <div class="card-body">
+                <h3 class="mb-3">
+                    <a class="post-title" href="{% url 'articles:detail' slug=article.slug %}">
+                        {{ article.title|capfirst }}
+                    </a>
+                </h3>
+
+                <ul class="card-meta list-inline">
+                    <li class="list-inline-item">
+                        <a href="#" class="card-meta-author">
+                            <img src="{% static 'images/admin.png' %}" />
+                            <span>Admin</span>
+                        </a>
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="ti-timer"></i>{{ article.reading_time }} Min To Read
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="ti-calendar"></i>{{ article.date }}
+                    </li>
+                </ul>
+                <p>{{ article.snippet }}</p>
+                <a href="{% url 'articles:detail' slug=article.slug %}" class="btn btn-outline-primary">Read More</a>
+            </div>
+        </article>
+    {% endfor %}
+
+    <ul class="pagination justify-content-center">
+        {% if articles.has_previous %}
+            <li class="page-item">
+                <a class="page-link" href="?page=1">First</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ articles.previous_page_number }}">Previous</a>
+            </li>
+        {% endif %}
+
+        <li class="page-item active">
+            <a class="page-link" href="#!">{{ articles.number }}</a>
+        </li>
+
+        {% if articles.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ articles.next_page_number }}">Next</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="?page={{ articles.paginator.num_pages }}">Last</a>
+            </li>
+        {% endif %}
+    </ul>
+</div>
+
+    <aside class="col-lg-4 @@sidebar">
+      <!-- about me -->
+      <div class="widget widget-about">
+        <h4 class="widget-title">Hi, I am Alex!</h4>
+
+        <img
+          class="img-fluid"
+          src="{% static 'images/author.jpg' %}"
+          alt="Themefisher"
+        />
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vel in in
+          donec iaculis tempus odio nunc laoreet . Libero ullamcorper.
+        </p>
+        <ul class="list-inline social-icons mb-3">
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-facebook"></i></a>
+          </li>
+
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-twitter-alt"></i></a>
+          </li>
+
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-linkedin"></i></a>
+          </li>
+
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-github"></i></a>
+          </li>
+
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-youtube"></i></a>
+          </li>
+        </ul>
+        <a href="about-me.html" class="btn btn-primary mb-2">About me</a>
+      </div>
+
+      <!-- Promotion -->
+      <div class="promotion">
+        <img
+          src="{% static 'images/promotion.jpg' %}"
+          class="img-fluid w-100"
+        />
+        <div class="promotion-content">
+          <h5 class="text-white mb-3">Create Stunning Website!!</h5>
+          <p class="text-white mb-4">
+            Lorem ipsum dolor sit amet, consectetur sociis. Etiam nunc amet id
+            dignissim. Feugiat id tempor vel sit ornare turpis posuere.
+          </p>
+          <a href="https://themefisher.com/" class="btn btn-primary"
+            >Get Started</a
+          >
+        </div>
+      </div>
+
+      <!-- Social -->
+      <div class="widget">
+        <h4 class="widget-title"><span>Social Links</span></h4>
+        <ul class="list-inline widget-social">
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-facebook"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-twitter-alt"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-linkedin"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-github"></i></a>
+          </li>
+          <li class="list-inline-item">
+            <a href="#"><i class="ti-youtube"></i></a>
+          </li>
+        </ul>
+      </div>
+    </aside>
   </div>
-  {% endfor %}
 </div>
 
 {% endblock %}
