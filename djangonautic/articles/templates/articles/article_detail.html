@@ -1,13 +1,42 @@
-{% extends 'base_layout.html' %} 
-{% block content %}
+{% extends 'base_layout.html' %} {% block content %} {% load static %}
 
-<div class="article-detail">
-    <div class="article">
-        <img src="{{article.thumb.url}}" />
-        <h2>{{article.title}}</h2>
-        <p>{{article.body}}</p>
-        <p>{{article.date}}</p>
+<section class="section">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class=" col-lg-9   mb-5 mb-lg-0">
+        <article>
+          <div class="post-slider mb-4 slick-initialized slick-slider">
+            <div class="slick-list draggable"><div class="slick-track" style="opacity: 1; width: 384px; transform: translate3d(0px, 0px, 0px);"><img src="{{article.thumb.url}}" class="card-img slick-slide slick-current slick-active" alt="post-thumb" data-slick-index="0" aria-hidden="false" tabindex="0" style="width: 384px;"></div></div>
+          </div>
+          
+          <h1 class="h2">{{ article.title|capfirst }} </h1>
+          <ul class="card-meta my-3 list-inline">
+            <li class="list-inline-item">
+              <a href="author-single.html" class="card-meta-author">
+                            <img src="{% static 'images/admin.png' %}" />
+                <span>Admin</span>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <i class="ti-timer"></i>{{ article.reading_time }} Min To Read
+            </li>
+            <li class="list-inline-item">
+              <i class="ti-calendar"></i>{{article.date}}
+            </li>
+           
+          </ul>
+          <div class="content"><p>{{article.body}}</p>
+
+          </div>
+        </article>
+        
+      </div>
+
+     
+      
     </div>
-</div>
+  </div>
+</section>
+
 
 {% endblock %}
